@@ -1,0 +1,40 @@
+@font-face {
+	font-family: 'font-icons';
+	src:url('fonts/font-icons.eot?-bfpzk1');
+	src:url('fonts/font-icons.eot?#iefix-bfpzk1') format('embedded-opentype'),
+		url('fonts/font-icons.woff?-bfpzk1') format('woff'),
+		url('fonts/font-icons.ttf?-bfpzk1') format('truetype'),
+		url('fonts/font-icons.svg?-bfpzk1#font-icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.snf-icon {
+	font-family: 'font-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.snf-icon-search:before {
+	content: "\63";
+}
+.snf-icon-envelope:before {
+	content: "\65";
+}
+.snf-icon-ok:before {
+	content: "\e602";
+}
+.snf-icon-remove:before {
+	content: "\62";
+}
+.snf-icon-envelope-alt:before {
+	content: "\64";
+}
