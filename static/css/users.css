@@ -118,3 +118,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e2ed', end
 body .modal.fade.in {
 	top:40%;
 }
+
+a[disabled] {
+    color: #999999;
+}
+
+a:not([disabled]):hover {
+	cursor: pointer;
+}
+
+.modal-footer form {
+	display: inline;
+}
+
+#contact textarea{
+	width: 100%;
+	min-height: 200px;
+}

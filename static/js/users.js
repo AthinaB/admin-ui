@@ -1,21 +1,74 @@
 $(document).ready(function() {
-	var selectedCheckboxes = 0;
-	
+	var selectedItems = {
+		actions: {
+			activate: true,
+			accept: true,
+			verify: true,
+			deactivate: true,
+			reject: true
+		},
+		uuids: []
+	};
+
+	var items = [];
+
 	$(window).scroll(function() {
 		fixedMime();
 	});
 
-	$('.table-users'). find('tbody input[type=checkbox]').click(function(e) {
-		e.stopPropagation();
-		if (this.checked) {
-			selectedCheckboxes++;
-			$(this).closest('tr').addClass('selected');
+	$('.sidebar a').click(function(e) {
+		if($(this).attr('disabled') !== undefined) {
+			e.preventDefault();
+			e.stopPropagation();
 		}
 		else {
-			selectedCheckboxes--;
-			$(this).closest('tr').removeClass('selected');
+			var modal = $(this).data('target');
+			var value = '{['+selectedItems.uuids+']}';
+			console.log('value', value);
+			$(modal).find('.modal-footer form input').val(value);
 		}
-		$('.filters').find('.selected .badge').html(selectedCheckboxes);
+	});
+
+	$('.table-users'). find('tbody input[type=checkbox]').click(function(e) {
+		e.stopPropagation();
+		var trEl = $(this).closest('tr');
+		var item = {
+			actions: {
+				activate: trEl.data('allow-activate'),
+				accept: trEl.data('allow-accept'),
+				verify: trEl.data('allow-verify'),
+				deactivate: trEl.data('allow-deactivate'),
+				reject: trEl.data('allow-reject')
+			},
+			id: trEl.attr('id')
+		};
+		if (this.checked) {
+			trEl.addClass('selected');
+			items.push(item);
+			enableActions(item);
+			selectedItems.uuids.push(item.id);
+		}
+		else {
+			trEl.removeClass('selected');
+			removeItem(trEl.attr('id'), selectedItems.uuids);
+			removeItem(item, items);
+			resetEnabledActions();
+			for(var i=0; i<items.length; i++) {
+				enableActions(items[i]);
+			}
+		}
+		$('.filters').find('.selected .badge').html(selectedItems.uuids.length);
+		for(var action in selectedItems.actions) {
+			var actionBtn = $('.sidebar').find('a.'+action);
+			if(!selectedItems.actions[action])
+				actionBtn.attr('disabled', 'disabled');
+			else
+				actionBtn.removeAttr('disabled')
+		};
+		if(selectedItems.uuids.length !== 0)
+			$('.sidebar').find('a.contact').removeAttr('disabled');
+		else
+			$('.sidebar').find('a').attr('disabled', 'disabled');
 	});
 
 	$('.table-users'). find('tbody tr').click(function() {
@@ -29,7 +82,34 @@ $(document).ready(function() {
 		e.preventDefault();
 		filterUsersTable(this);
 	});
+	function resetEnabledActions() {
+		for(var prop in selectedItems.actions)
+			selectedItems.actions[prop] = true;
+	};
 
+	function removeItem(item, array) {
+		var index;
+		console.log('item ', item);
+		console.log('typeof ', typeof(item));
+		if (typeof(item) === 'object') {
+			index = array.map(function(item) {
+				return item.id;
+			}).indexOf(item.id);
+		}
+		else
+			index = array.indexOf(item);
+
+		if(index > -1) {
+			array.splice(index, 1);
+		}
+	};
+
+	function enableActions(item) {
+		var prevActions = selectedItems.actions;
+		for(var prop in prevActions) {
+			prevActions[prop] = prevActions[prop] && item.actions[prop];
+		}
+	};
 
 	// subnav-fixed is added/removed from processScroll()
 	function fixedMime() {
@@ -86,3 +166,4 @@ $(document).ready(function() {
 		}
 	}
 });
+
