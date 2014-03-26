@@ -84,95 +84,57 @@
             <th>Suspended VMs<span class="caret"></span></th>
           </tr>
         </thead>
-         <tr data-state="inactive">
-          <td class="checkbox-column">
-              <input type="checkbox">
-          </td>
-          <td>Alexoulinaki :P</td>
-          <td>yio@mail.com</td>
-          <td>Inactive</td>
-          <td>No</td>
-        </tr>
-        <tr data-state="verified">
-          <td class="checkbox-column">
-              <input type="checkbox">
-          </td>
-          <td>Georgios. Papadakis</td>
-          <td>giorgios@mail.ntua.gr</td>
-          <td>Verified</td>
-          <td>No</td>
-        </tr>
-        <tr data-state="active">
-          <td class="checkbox-column">
-              <input type="checkbox">
-          </td>
-          <td>Athina Christina Lykogianni Bekakou</td>
-          <td>athinabek@admin.grnet.gr</td>
-          <td>Active</td>
-          <td>Yes</td>
-        </tr>
-        <tr data-state="inactive">
-          <td class="checkbox-column">
-              <input type="checkbox">
-          </td>
-          <td>G. Papadakis</td>
-          <td>giorgios@mail.com</td>
-          <td>Inactive</td>
-          <td>No</td>
-        </tr>
-        <tr data-state="verified">
-          <td class="checkbox-column">
-              <input type="checkbox">
-          </td>
-          <td>Georgios. Papadakis</td>
-          <td>giorgios@mail.ntua.gr</td>
-          <td>Verified</td>
-          <td>No</td>
-        </tr>
-        <tr data-state="active">
-          <td class="checkbox-column">
-              <input type="checkbox">
-          </td>
-          <td>Athina Christina Lykogianni Bekakou</td>
-          <td>athinabek@admin.grnet.gr</td>
-          <td>Active</td>
-          <td>Yes</td>
-        </tr>
-        <tr data-state="inactive">
-          <td class="checkbox-column">
-            <div class="checkbox">
-                <label>
-                  <input type="checkbox">
-                </label>
-            </div>
-          </td>
-          <td>G. Papadakis</td>
-          <td>giorgios@mail.com</td>
-          <td>Inactive</td>
-          <td>No</td>
-        </tr>
-        <tr data-state="verified">
-          <td class="checkbox-column">
-              <input type="checkbox">
-          </td>
-          <td>Georgios. Papadakis</td>
-          <td>giorgios@mail.ntua.gr</td>
-          <td>Verified</td>
-          <td>No</td>
-        </tr>
-        <tr data-state="active">
-          <td class="checkbox-column">
-              <input type="checkbox">
-          </td>
-          <td>Athina Christina Lykogianni Bekakou</td>
-          <td>athinabek@admin.grnet.gr</td>
-          <td>Active</td>
-          <td>Yes</td>
-        </tr>
+          <tbody>
+            <tr data-active=true data-accepted=true data-rejected=false data-verified=true>
+              <td class="checkbox-column">
+                <input type="checkbox">
+              </td>
+              <td>Alex</td>
+              <td>yio@mail.com</td>
+              <td>Act | Acc | Ver</td>
+              <td>No</td>
+            </tr>
+            <tr data-active=false data-accepted=true data-rejected=false data-verified=true>
+              <td class="checkbox-column">
+                <input type="checkbox">
+              </td>
+              <td>Georgios Papadakis</td>
+              <td>giorgios@mail.ntua.gr</td>
+              <td>Acc | Ver</td>
+              <td>No</td>
+            </tr>
+            <tr data-active=false data-accepted=false data-rejected=false data-verified=true>
+              <td class="checkbox-column">
+                <input type="checkbox">
+              </td>
+              <td>Christina Athina Lykogianni Bekakou</td>
+              <td>athinabek@admin.grnet.gr</td>
+              <td>Ver</td>
+              <td>Yes</td>
+            </tr>
+            <tr data-active=false data-accepted=false data-rejected=true data-verified=true>
+              <td class="checkbox-column">
+                <input type="checkbox">
+              </td>
+              <td>G. Papadakis</td>
+              <td>giorgios@mail.com</td>
+              <td>Rej | Ver</td>
+              <td>No</td>
+            </tr>
+            <tr data-active=false data-accepted=false data-rejected=false data-verified=false>
+              <td class="checkbox-column">
+                <input type="checkbox">
+              </td>
+              <td>Athanasios Diakos</td>
+              <td>giorgios@mail.ntua.gr</td>
+              <td>All false (not ver)</td>
+              <td>No</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
-    </div>
+  </div>
 
 
 <!-- Modals -->
