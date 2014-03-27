@@ -10,7 +10,7 @@ $(document).ready(function() {
 		uuids: []
 	};
 
-	var items = [];
+    var items = [];
 
 	$(window).scroll(function() {
 		fixedMime();
@@ -23,9 +23,7 @@ $(document).ready(function() {
 		}
 		else {
 			var modal = $(this).data('target');
-			var value = '{['+selectedItems.uuids+']}';
-			console.log('value', value);
-			$(modal).find('.modal-footer form input').val(value);
+			$(modal).find('.modal-footer form input[name="uuids"]').val('['+selectedItems.uuids+']');
 		}
 	});
 
@@ -89,8 +87,6 @@ $(document).ready(function() {
 
 	function removeItem(item, array) {
 		var index;
-		console.log('item ', item);
-		console.log('typeof ', typeof(item));
 		if (typeof(item) === 'object') {
 			index = array.map(function(item) {
 				return item.id;
@@ -106,9 +102,12 @@ $(document).ready(function() {
 
 	function enableActions(item) {
 		var prevActions = selectedItems.actions;
+        var boolAction;
 		for(var prop in prevActions) {
-			prevActions[prop] = prevActions[prop] && item.actions[prop];
+            boolAction = (item.actions[prop] === "True");
+             prevActions[prop] = prevActions[prop] && boolAction;
 		}
+
 	};
 
 	// subnav-fixed is added/removed from processScroll()
@@ -164,6 +163,7 @@ $(document).ready(function() {
 					linkAll.removeClass('current');
 			}
 		}
-	}
+	};
+
 });
 
