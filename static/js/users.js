@@ -123,32 +123,38 @@ $(document).ready(function() {
 		var tableRows, linkAll;
 		var links;
 		var linkSelected = link.closest('li').siblings('li').find('a.selected');
-
+		var dataName = Object.keys(link.data()).toString().toDash();
+		var dataValue = link.data(dataName);
+		console.log('dataName ', dataName);
+		console.log('dataVlaue ', dataValue);
 		link.toggleClass('current');
-		
-		if(link.data('state') === 'all') {
-			linkSelected.removeClass('current');
-			links = link.closest('li').siblings('li').find('a:not(.selected)');
-			tableRows = $('.table-users').find('tbody tr');
-			if(link.hasClass('current')) {
-				links.addClass('current');
-				tableRows.show();
+		if(dataName == 'state') {
+			if(link.data('state') === 'all') {
+				linkSelected.removeClass('current');
+				links = link.closest('li').siblings('li').find('a:not(.selected)');
+				tableRows = $('.table-users').find('tbody tr');
+				if(link.hasClass('current')) {
+					links.addClass('current');
+					tableRows.show();
+				}
+				else {
+					links.removeClass('current');
+					tableRows.hide();
+				}
 			}
-			else {
+			else if(link.data('state') === 'selected') {
+				console.log('data-state=selected')
+				links = link.closest('li').siblings('li').find('a');
 				links.removeClass('current');
-				tableRows.hide();
+				$('.table-users').find('tbody tr').hide();
+				$('.table-users').find('.checkbox-column input[type=checkbox]:checked').closest('tr').show();
 			}
-		}
-		else if(link.data('state') === 'selected') {
-			links = link.closest('li').siblings('li').find('a');
-			links.removeClass('current');
-			$('.table-users').find('tbody tr').hide();
-			$('.table-users').find('.checkbox input[type=checkbox]:checked').closest('tr').show();
 		}
 		else {
 			linkSelected.removeClass('current');
 			links = link.closest('li').siblings('li').find('a.current');
-			tableRows = $('.table-users').find("tr[data-state='" + link.data('state') + "']");
+			tableRows = $('.table-users').find("tr[data-"+dataName+"='"+dataValue+"']");
+			console.log('* '+ "tr["+dataName+"="+dataValue+"]");
 			linkAll = link.closest('li').siblings('li').find('a[data-state=all]');
 			if(link.hasClass('current')) {
 				tableRows.show();
@@ -164,6 +170,8 @@ $(document).ready(function() {
 			}
 		}
 	};
-
+	String.prototype.toDash = function(){
+		return this.replace(/([A-Z])/g, function($1){return "-"+$1.toLowerCase();});
+	};
 });
 
